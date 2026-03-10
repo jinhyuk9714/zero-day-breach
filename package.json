@@ -1,5 +1,6 @@
 {
   "name": "zero-day-breach",
+  "description": "결정론적 브랜칭 맵을 따라 침입 경로를 선택하는 전술 덱빌딩 웹 게임",
   "version": "0.0.1",
   "private": true,
   "type": "module",

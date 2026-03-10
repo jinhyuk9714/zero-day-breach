@@ -7,20 +7,138 @@
   </head>
   <body>
     <main class="shell">
-      <header class="masthead">
-        <p class="eyebrow">Deterministic deckbuilder prototype</p>
-        <h1>Zero-Day Breach</h1>
-      </header>
+      <section class="game-shell">
+        <header class="app-header">
+          <div class="brand-block">
+            <p id="header-eyebrow" class="eyebrow">Deterministic deckbuilder prototype</p>
+            <h1>Zero-Day Breach</h1>
+            <p id="header-note" class="subhead">Hybrid breach interface online.</p>
+          </div>
+          <div class="header-tools">
+            <span id="phase-pill" class="phase-pill">MENU</span>
+            <span class="hint-chip">F fullscreen</span>
+          </div>
+        </header>
 
-      <section class="stage">
-        <canvas id="game" width="1280" height="720" aria-label="Zero-Day Breach game canvas"></canvas>
-      </section>
+        <section class="combat-console">
+          <section class="battle-stage">
+            <canvas id="game" width="1280" height="720" aria-label="Zero-Day Breach game canvas"></canvas>
 
-      <section class="command-row" aria-label="Game controls">
-        <button id="start-btn" type="button">Start Breach</button>
-        <button id="end-turn-btn" type="button" hidden>End Turn</button>
-        <button id="restart-btn" type="button" hidden>Restart Run</button>
-        <p id="status-line" class="status-line">System idle.</p>
+            <div id="start-overlay" class="stage-overlay start-overlay">
+              <div class="stage-card stage-card--start">
+                <p class="panel-label">Mission brief</p>
+                <h2>Read intent. Spend energy. Keep the breach alive.</h2>
+                <div id="brief-list" class="brief-list"></div>
+              </div>
+            </div>
+
+            <div id="fx-layer" class="fx-layer" aria-hidden="true">
+              <div id="launch-ghost" class="launch-ghost" hidden>
+                <span id="launch-ghost-cost" class="launch-ghost__cost">1</span>
+                <div class="launch-ghost__meta">
+                  <strong id="launch-ghost-name">Ping</strong>
+                  <span id="launch-ghost-kind">attack</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="play-lane" class="play-lane" hidden>
+              <span id="play-lane-label">Drag a card upward to execute</span>
+            </div>
+
+            <div id="map-overlay" class="stage-overlay map-overlay" hidden>
+              <div class="stage-card stage-card--map">
+                <p class="panel-label">Route board</p>
+                <h2 id="map-title">Select the next node</h2>
+                <p id="map-detail" class="reward-detail">Pick an available node to continue the breach.</p>
+                <div class="map-board-shell map-board-shell--full">
+                  <svg id="map-links" class="map-links" viewBox="0 0 300 600" aria-hidden="true"></svg>
+                  <div id="map-board" class="map-board" aria-label="Route board"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="reward-overlay" class="stage-overlay reward-overlay" hidden>
+              <div class="stage-card stage-card--reward">
+                <p class="panel-label">Reward cache</p>
+                <h2 id="reward-title">Install one package</h2>
+                <p id="reward-detail" class="reward-detail">Choose one package before the next node.</p>
+                <div id="reward-choices" class="reward-choice-grid"></div>
+              </div>
+            </div>
+
+            <div id="result-overlay" class="stage-overlay result-overlay" hidden>
+              <div class="result-card">
+                <p id="result-eyebrow" class="result-eyebrow">BREACH SUCCESSFUL</p>
+                <h2 id="result-title">Firewall Neutralized</h2>
+                <p id="result-detail">Final player HP 40 | Firewall HP 0</p>
+                <p id="result-action" class="result-action">Use Restart Run to open a fresh breach.</p>
+              </div>
+            </div>
+          </section>
+
+          <aside class="tactical-panel" aria-label="Battle heads-up display">
+            <article id="enemy-panel" class="panel enemy-panel">
+              <div class="panel-head">
+                <p id="enemy-panel-label" class="panel-label">Sentinel core</p>
+                <h2 id="enemy-panel-title">Firewall Readout</h2>
+              </div>
+              <div class="intent-card">
+                <span id="enemy-intent-tag" class="intent-tag">attack</span>
+                <h3 id="enemy-intent-title">Scan</h3>
+                <p id="enemy-intent-detail">Incoming damage 7</p>
+              </div>
+              <div id="enemy-stats" class="stat-grid stat-grid--enemy"></div>
+            </article>
+
+            <article id="player-panel" class="panel stats-panel">
+              <div class="panel-head">
+                <p class="panel-label">Operator</p>
+                <h2>Run Status</h2>
+              </div>
+              <div id="player-stats" class="stat-grid"></div>
+            </article>
+
+            <section class="status-strip" aria-label="Battle telemetry">
+              <div class="status-copy">
+                <p class="panel-label">System log</p>
+                <p id="status-line" class="status-line">System idle.</p>
+              </div>
+              <div class="pile-strip">
+                <span id="draw-count" class="pile-chip">Draw 0</span>
+                <span id="discard-count" class="pile-chip">Discard 0</span>
+                <span id="lag-count" class="pile-chip">Lag 0</span>
+              </div>
+              <div id="minimap-shell" class="minimap-shell" hidden>
+                <div class="minimap-head">
+                  <p class="panel-label">Route trace</p>
+                  <p id="minimap-title" class="minimap-title">Current path</p>
+                </div>
+                <div class="map-board-shell map-board-shell--mini">
+                  <svg id="minimap-links" class="map-links" viewBox="0 0 300 600" aria-hidden="true"></svg>
+                  <div id="minimap-board" class="map-board map-board--mini" aria-label="Route minimap"></div>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </section>
+
+        <section class="hand-dock" aria-label="Command rail">
+          <div class="dock-head">
+            <div>
+              <p class="panel-label">Command rail</p>
+              <h2 id="dock-title">Prepare the breach</h2>
+            </div>
+            <div class="action-row">
+              <button id="start-btn" type="button">Start Breach</button>
+              <button id="end-turn-btn" type="button" hidden>End Turn</button>
+              <button id="restart-btn" type="button" hidden>Restart Run</button>
+            </div>
+          </div>
+          <div class="hand-rail-shell">
+            <div id="hand-rail" class="hand-rail" aria-live="polite"></div>
+          </div>
+        </section>
       </section>
     </main>
 

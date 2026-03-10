@@ -1,0 +1,16 @@
+{
+  "name": "zero-day-breach",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "build": "vite build",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "playwright": "^1.50.0",
+    "vite": "^6.0.0"
+  }
+}

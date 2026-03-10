@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zero-Day Breach</title>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <p class="eyebrow">Deterministic deckbuilder prototype</p>
+        <h1>Zero-Day Breach</h1>
+      </header>
+
+      <section class="stage">
+        <canvas id="game" width="1280" height="720" aria-label="Zero-Day Breach game canvas"></canvas>
+      </section>
+
+      <section class="command-row" aria-label="Game controls">
+        <button id="start-btn" type="button">Start Breach</button>
+        <button id="end-turn-btn" type="button" hidden>End Turn</button>
+        <button id="restart-btn" type="button" hidden>Restart Run</button>
+        <p id="status-line" class="status-line">System idle.</p>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
